@@ -83,16 +83,6 @@ void loop()
         * Print current send values
         */
         Serial.println(inByte);
-        /*Serial.print(F("Send now: address=0x"));
-        Serial.print(sAddress, HEX);
-        Serial.print(F(" command=0x"));
-        Serial.print(sCommand, HEX);
-        Serial.print(F(" repeats="));
-        Serial.print(sRepeats);
-        Serial.println();
-
-        Serial.println(F("Send NEC with 16 bit address"));
-        Serial.flush();*/
 
         // Results for the first loop to: Protocol=NEC Address=0x102 Command=0x34 Raw-Data=0xCB340102 (32 bits)
         //按1是电源
@@ -108,7 +98,7 @@ void loop()
         //按3是音量+
         if (inByte == 51)
         {
-            IrSender.sendRaw(buf2, 67, 38);
+            IrSender.sendRaw(buf3, 67, 38);
         }
         //按4是音量-
         if (inByte == 52)
@@ -150,25 +140,6 @@ void loop()
         {
             IrSender.sendNEC(sAddress, sCommand7, sRepeats);
         }
-        
-        
-
-        /*
-         * If you cannot avoid to send a raw value directly like e.g. 0xCB340102 you must use sendNECRaw()
-         */
-         //    Serial.println(F("Send NECRaw 0xCB340102"));
-         //    IrSender.sendNECRaw(0xCB340102, sRepeats);
-             /*
-              * Increment send values
-              * Also increment address just for demonstration, which normally makes no sense
-              */
-        //sAddress += 0x0101;
-        //sCommand += 0x11;
-        //sRepeats++;
-        //// clip repeats at 4
-        //if (sRepeats > 4) {
-        //    sRepeats = 4;
-        //}
 
         delay(1000);  // delay must be greater than 5 ms (RECORD_GAP_MICROS), otherwise the receiver sees it as one long signal
     }
