@@ -95,8 +95,63 @@ void loop()
         Serial.flush();*/
 
         // Results for the first loop to: Protocol=NEC Address=0x102 Command=0x34 Raw-Data=0xCB340102 (32 bits)
-        IrSender.sendNEC(sAddress, sCommand1, sRepeats);
-        //IrSender.sendRaw(buf2, 67, 38);
+        //按1是电源
+        if (inByte == 49)
+        {
+            IrSender.sendRaw(buf2, 67, 38);
+        }
+        //按2是输入选择
+        if (inByte == 50)
+        {
+            IrSender.sendRaw(buf1, 67, 38);
+        }
+        //按3是音量+
+        if (inByte == 51)
+        {
+            IrSender.sendRaw(buf2, 67, 38);
+        }
+        //按4是音量-
+        if (inByte == 52)
+        {
+            IrSender.sendRaw(buf4, 67, 38);
+        }
+        //按z是电源
+        if (inByte == 122)
+        {
+            IrSender.sendNEC(sAddress, sCommand1, sRepeats);
+        }
+        //按w是上
+        if (inByte == 119)
+        {
+            IrSender.sendNEC(sAddress, sCommand2, sRepeats);
+        }
+        //按s是下
+        if (inByte == 115)
+        {
+            IrSender.sendNEC(sAddress, sCommand3, sRepeats);
+        }
+        //按a是左
+        if (inByte == 97)
+        {
+            IrSender.sendNEC(sAddress, sCommand4, sRepeats);
+        }
+        //按d是右
+        if (inByte == 100)
+        {
+            IrSender.sendNEC(sAddress, sCommand5, sRepeats);
+        }
+        //按e是OK
+        if (inByte == 101)
+        {
+            IrSender.sendNEC(sAddress, sCommand6, sRepeats);
+        }
+        //按q是返回
+        if (inByte == 113)
+        {
+            IrSender.sendNEC(sAddress, sCommand7, sRepeats);
+        }
+        
+        
 
         /*
          * If you cannot avoid to send a raw value directly like e.g. 0xCB340102 you must use sendNECRaw()
